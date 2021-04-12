@@ -9,7 +9,7 @@ const ProductsListStyles = styled.div`
   grid-gap: 60px;
 `;
 
-export default function Recommended({ matches, total }) {
+export default function Recommended({ matches }) {
   const { fetchAllProducts, products } = useContext(ShopContext);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function Recommended({ matches, total }) {
   }, [fetchAllProducts]);
 
   if (!products || products.length === 0) return <div>Loading ...</div>;
-  
+
   let recommenedProds = [];
   for (let index = 0; index < 5; index++) {
     const rand = Math.floor(Math.random() * products.length);
@@ -26,8 +26,7 @@ export default function Recommended({ matches, total }) {
     if (recommenedProds.some((q) => q === element)) {
     } else {
       recommenedProds = [...recommenedProds, element];
-    }
-    //console.log(recommenedProds);
+    }    
   }
   return (
     <div>

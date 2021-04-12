@@ -18,7 +18,7 @@ class ShopProvider extends Component {
   };
 
   componentDidMount() {
-    if (localStorage.checkout_id) {      
+    if (localStorage.checkout_id) {
       this.fetchCheckout(localStorage.checkout_id);
     } else {
       this.createCheckout();
@@ -26,24 +26,36 @@ class ShopProvider extends Component {
   }
 
   createCheckout = async () => {
-    console.log("createCheck");
     const checkout = await client.checkout.create();
     localStorage.setItem("checkout_id", checkout.id);
-    this.setState({ checkout });
+    this.setState({ checkout: checkout });
   };
 
   fetchCheckout = async (checkout_id) => {
     client.checkout.fetch(checkout_id).then((checkout) => {
-      this.setState(checkout);
+      this.setState({ checkout: checkout });
     });
   };
 
-  addItemCheckout = async () => {};
+  addItemCheckout = async (variantId, quantity) => {
+    const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }];
+    const checkout = await client.checkout.addLineItems(
+      this.state.checkout.id,
+      lineItemsToAdd
+    );
+    this.setState({ checkout });
+  };
 
-  removeLineItem = async (lineItemIdsToRemove) => {};
+  removeLineItem = async (lineItemIdsToRemove) => {
+    const checkout = await client.checkout.removeLineItems(
+      this.state.checkout.id,
+      lineItemIdsToRemove
+    );
+    this.setState({ checkout });
+  };
 
   fetchAllProducts = async () => {
-    console.log('fetchall');
+    console.log("fetchall");
     const products = await client.product.fetchAll();
     //console.log(products);
     this.setState({ products: products });

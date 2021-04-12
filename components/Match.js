@@ -91,7 +91,7 @@ export default function Match() {
           position={3}
         />
       )}
-      {matches.length == 4 && <Recommended total={4} matches={matches} />}
+      {matches.length == 4 && <Recommended matches={matches} />}
     </div>
   );
 }

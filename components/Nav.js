@@ -74,7 +74,7 @@ export default function Nav() {
       <Link href="/products">Products</Link>
       <Link href="/match">Find your match</Link>
       <Link href="/orders">Orders</Link>
-      <Link href="/account">Account</Link>
+      <Link href="/checkout">Checkout</Link>
       <button type="button" >
         MyCart
       </button>
