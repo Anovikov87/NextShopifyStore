@@ -12,9 +12,9 @@ const ProductsListStyles = styled.div`
 export default function Recommended({ matches }) {
   const { fetchAllProducts, products } = useContext(ShopContext);
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetchAllProducts();
-  }, [fetchAllProducts]);
+  }, [fetchAllProducts]);*/
 
   if (!products || products.length === 0) return <div>Loading ...</div>;
 
